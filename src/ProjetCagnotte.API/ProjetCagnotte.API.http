@@ -1,0 +1,6 @@
+@ProjetCagnotte.API_HostAddress = http://localhost:7289
+
+GET {{ProjetCagnotte.API_HostAddress}}/Product/
+Accept: application/json
+
+###

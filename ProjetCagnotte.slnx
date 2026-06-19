@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="src/ProjetCagnotte.API/ProjetCagnotte.API.csproj" Id="f8349542-df4e-4658-970b-166e25bbe8d3" />
+  <Project Path="src/ProjetCagnotte.Application/ProjetCagnotte.Application.csproj" Id="a8c8596b-2487-4a72-b46e-efb0df92d653" />
+  <Project Path="src/ProjetCagnotte.Domain/ProjetCagnotte.Domain.csproj" Id="c04ed3ab-99eb-4ff5-bfa7-6e3de6b6f5cb" />
+  <Project Path="src/ProjetCagnotte.Infrastructure/ProjetCagnotte.Infrastructure.csproj" Id="e50fab66-6cf7-4ef8-9688-620fc0b7fa11" />
+</Solution>
