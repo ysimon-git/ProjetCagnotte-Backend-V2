@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjetCagnotte.Application.Interfaces;
+using ProjetCagnotte.Domain.Entities;
 using ProjetCagnotte.Infrastructure.Data;
 using ProjetCagnotte.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace ProjetCagnotte.Infrastructure
 {
@@ -20,6 +20,10 @@ namespace ProjetCagnotte.Infrastructure
 
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped<IContributionRepository,ContributionRepository>();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<AppDbContext>()
+                    .AddDefaultTokenProviders();
 
             return services;
 
