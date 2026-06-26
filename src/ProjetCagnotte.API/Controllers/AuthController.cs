@@ -12,8 +12,8 @@ namespace ProjetCagnotte.API.Controllers
     public class AuthController : ControllerBase
     {
 
+        //test of testbranch
         private IAuthService _authService;
-
 
         public AuthController(IAuthService authService)
         {
