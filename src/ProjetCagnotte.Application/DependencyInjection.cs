@@ -13,7 +13,7 @@ namespace ProjetCagnotte.Application
         {
             services.AddScoped<IProductService , ProductService>();
             services.AddScoped<IContributionService, ContributionService>();
-
+   
             return services;
 
         }
