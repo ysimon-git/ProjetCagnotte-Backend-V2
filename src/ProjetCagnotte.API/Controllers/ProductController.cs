@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProjetCagnotte.Application.DTOs;
 using ProjetCagnotte.Application.Interfaces;
 
 namespace ProjetCagnotte.API.Controllers
@@ -38,6 +39,29 @@ namespace ProjetCagnotte.API.Controllers
             return Ok(product);
         }
 
+
+        [HttpPost]
+        public async Task<int> AddProduct(CreateProductDto product)
+        {
+            return await _productService.AddProduct(product);
+        }
+
+
+        [HttpPut]
+        public async Task<Boolean> UpdateProduct(int id,UpdateProductDto product)
+        {
+
+            return await _productService.UpdateProduct(id, product);
+
+        }
+
+
+
+        [HttpDelete]
+        public async Task<Boolean> DeleteProduct(int id)
+        {
+            return await _productService.DeleteProduct(id);
+        }
 
     }
 }

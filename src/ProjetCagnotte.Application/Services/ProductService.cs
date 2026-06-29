@@ -1,6 +1,7 @@
 ﻿using ProjetCagnotte.Application.DTOs;
 using ProjetCagnotte.Application.Interfaces;
 using ProjetCagnotte.Application.Mappers;
+using ProjetCagnotte.Domain.Entities;
 
 namespace ProjetCagnotte.Application.Services
 {
@@ -51,5 +52,42 @@ namespace ProjetCagnotte.Application.Services
             return result;
 
         }
+
+        public async Task<int> AddProduct(CreateProductDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.ProductName))
+                throw new ArgumentException("Product name is mandatory");
+
+            if (dto.Price <= 0)
+                throw new ArgumentException("Price must be greater than 0");
+
+
+
+            var product=ProductMapper.FromDto(dto);
+            return await _productRepository.AddProductAsync(product);
+
+        }
+
+        public async Task<bool> UpdateProduct(int id,UpdateProductDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.ProductName))
+                throw new ArgumentException("Product name is mandatory");
+
+            if (dto.Price <= 0)
+                throw new ArgumentException("Price must be greater than 0");
+
+
+
+            var product = ProductMapper.FromDtoUpdate(dto);
+            return await _productRepository.UpdateProductAsync(id, product);
+
+        }
+
+        public async Task<bool> DeleteProduct(int id)
+        {
+           return await _productRepository.DeleteProductAsync(id);
+        }
+
+ 
     }
 }

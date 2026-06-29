@@ -21,5 +21,28 @@ namespace ProjetCagnotte.Application.Mappers
                 IsFullyFunded = fundedAmount >= product.Price
             };
         }
+
+
+        public static Product FromDto(CreateProductDto dto)
+        {
+            return new Product
+            {
+                ProductName = dto.ProductName,
+                ProductDescription = dto.ProductDescription,
+                Price = dto.Price,
+                ImageUrl = dto.ImageUrl,
+            };
+        }
+
+        public static Product FromDtoUpdate(UpdateProductDto dto)
+        {
+            return new Product
+            {
+                ProductName = dto.ProductName,
+                ProductDescription = dto.ProductDescription,
+                Price = dto.Price,
+                ImageUrl = dto.ImageUrl,
+            };
+        }
     }
 }

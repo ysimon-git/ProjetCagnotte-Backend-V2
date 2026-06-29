@@ -10,5 +10,8 @@ namespace ProjetCagnotte.Application.Interfaces
     {
         Task<IEnumerable<ProductDto>> GetAllProductAsync();
         Task<ProductDto?> GetProductByIdAsync(int id);
+        Task<int> AddProduct(CreateProductDto product);
+        Task<Boolean> UpdateProduct(int id,UpdateProductDto product);
+        Task<Boolean> DeleteProduct(int id);
     }
 }
