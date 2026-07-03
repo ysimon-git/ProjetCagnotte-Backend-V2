@@ -8,6 +8,7 @@ using ProjetCagnotte.Application.Services;
 using ProjetCagnotte.Domain.Entities;
 using ProjetCagnotte.Infrastructure.Data;
 using ProjetCagnotte.Infrastructure.Repositories;
+using ProjetCagnotte.Infrastructure.Security;
 
 
 namespace ProjetCagnotte.Infrastructure
@@ -26,17 +27,16 @@ namespace ProjetCagnotte.Infrastructure
             //Automaticly registered in DI with "AddIdentity":
             //UserManager < ApplicationUser >
             //SignInManager < ApplicationUser >
-            //RoleManager < IdentityRole >
-            //IPasswordHasher < ApplicationUser >
-            //IUserStore < ApplicationUser >
-            //IRoleStore<IdentityRole>
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<AppDbContext>()
-                    .AddDefaultTokenProviders();
+            services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddSignInManager()
+                .AddDefaultTokenProviders();
 
 
 
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 
 

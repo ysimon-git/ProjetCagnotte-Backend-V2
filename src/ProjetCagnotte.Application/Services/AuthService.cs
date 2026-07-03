@@ -10,24 +10,44 @@ namespace ProjetCagnotte.Application.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
 
-        public AuthService(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager)
+        public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IJwtTokenGenerator jwtTokenGenerator)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _jwtTokenGenerator = jwtTokenGenerator;
         }
 
 
-        public async Task LoginAsync(LoginDto dto)
+        public async Task<LoginResponseDto> LoginAsync(LoginDto dto)
         {
-            var result=await _signInManager.PasswordSignInAsync(dto.Email, dto.Password,false,false);
 
-            if (!result.Succeeded)
+            var user=await _userManager.FindByEmailAsync(dto.Email);
+            
+            if(user==null)
             {
-                throw new UnauthorizedAccessException("invalid email or password");
+                throw new UnauthorizedAccessException("Invalid email");
             }
+
+            var isValidPassword=await _userManager.CheckPasswordAsync(user,dto.Password);
+
+            if(!isValidPassword)
+            {
+                throw new UnauthorizedAccessException("Invalid password");
+            }
+
+
+            var token = _jwtTokenGenerator.GenerateToken(user);
+
+            return new LoginResponseDto
+            {
+                Email = dto.Email,
+                Token = token
+            };
         }
+
 
 
         public async Task RegisterAsync(RegisterDto dto)

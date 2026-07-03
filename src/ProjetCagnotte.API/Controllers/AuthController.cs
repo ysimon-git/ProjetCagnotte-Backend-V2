@@ -35,9 +35,9 @@ namespace ProjetCagnotte.API.Controllers
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
 
-            await _authService.LoginAsync(loginDto);
+            var result=await _authService.LoginAsync(loginDto);
 
-            return Ok(new { message = "Connection done" });
+            return Ok(result);
 
 
         }

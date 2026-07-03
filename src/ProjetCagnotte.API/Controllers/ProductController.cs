@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetCagnotte.Application.DTOs;
 using ProjetCagnotte.Application.Interfaces;
@@ -40,6 +41,8 @@ namespace ProjetCagnotte.API.Controllers
         }
 
 
+        //no create without authorization
+        [Authorize]
         [HttpPost]
         public async Task<int> AddProduct(CreateProductDto product)
         {
@@ -47,6 +50,8 @@ namespace ProjetCagnotte.API.Controllers
         }
 
 
+        //no update without authorization
+        [Authorize]
         [HttpPut]
         public async Task<Boolean> UpdateProduct(int id,UpdateProductDto product)
         {
@@ -56,7 +61,8 @@ namespace ProjetCagnotte.API.Controllers
         }
 
 
-
+        //no delete without authorization
+        [Authorize]
         [HttpDelete]
         public async Task<Boolean> DeleteProduct(int id)
         {
