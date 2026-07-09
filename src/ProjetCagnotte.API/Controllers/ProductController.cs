@@ -42,7 +42,7 @@ namespace ProjetCagnotte.API.Controllers
 
 
         //no create without authorization
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<int> AddProduct(CreateProductDto product)
         {
@@ -51,7 +51,7 @@ namespace ProjetCagnotte.API.Controllers
 
 
         //no update without authorization
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public async Task<Boolean> UpdateProduct(int id,UpdateProductDto product)
         {
@@ -62,7 +62,7 @@ namespace ProjetCagnotte.API.Controllers
 
 
         //no delete without authorization
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<Boolean> DeleteProduct(int id)
         {
