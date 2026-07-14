@@ -23,16 +23,18 @@ namespace ProjetCagnotte.Application.Mappers
         }
 
 
-        public static Product FromDto(CreateProductDto dto)
+        public static Product FromDto(CreateProductDto dto,string imageUrl)
         {
             return new Product
             {
                 ProductName = dto.ProductName,
                 ProductDescription = dto.ProductDescription,
                 Price = dto.Price,
-                ImageUrl = dto.ImageUrl,
+                ImageUrl = imageUrl
             };
         }
+
+
 
         public static Product FromDtoUpdate(UpdateProductDto dto)
         {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProjetCagnotte.API.Requests;
 using ProjetCagnotte.Application.DTOs;
 using ProjetCagnotte.Application.Interfaces;
 
@@ -42,12 +43,36 @@ namespace ProjetCagnotte.API.Controllers
 
 
         //no create without authorization
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpPost]
-        public async Task<int> AddProduct(CreateProductDto product)
+        public async Task<IActionResult> AddProduct([FromForm] CreateProductRequest request)
         {
-            return await _productService.AddProduct(product);
+            await using var stream =request.Image.OpenReadStream();
+
+            var dto = new CreateProductDto
+            {
+                ProductName = request.ProductName,
+                ProductDescription =request.ProductDescription,
+
+                Price = request.Price,
+
+                Image = new UploadedFileDto
+                {
+                    Content = stream,
+                    FileName = request.Image.FileName,
+                    ContentType = request.Image.ContentType
+                }
+            };
+
+            var productId =await _productService.AddProduct(dto);
+
+            return Ok(new
+            {
+                id = productId
+            });
         }
+
 
 
         //no update without authorization

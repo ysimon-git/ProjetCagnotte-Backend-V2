@@ -10,13 +10,14 @@ namespace ProjetCagnotte.Application.Services
 
         private readonly IProductRepository _productRepository;
         private readonly IContributionRepository _contributionRepository;
+        private readonly IFileStorageService _fileStorageService;
 
 
-        public ProductService(IProductRepository productRepository,IContributionRepository contributionRepository)
+        public ProductService(IProductRepository productRepository,IContributionRepository contributionRepository, IFileStorageService fileStorageService)
         {
             _productRepository = productRepository;
             _contributionRepository = contributionRepository;
-
+            _fileStorageService = fileStorageService;
         }
 
 
@@ -53,20 +54,17 @@ namespace ProjetCagnotte.Application.Services
 
         }
 
+
         public async Task<int> AddProduct(CreateProductDto dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.ProductName))
-                throw new ArgumentException("Product name is mandatory");
+            var imageUrl = await _fileStorageService.SaveImageAsync(dto.Image);
 
-            if (dto.Price <= 0)
-                throw new ArgumentException("Price must be greater than 0");
+            var product = ProductMapper.FromDto(dto, imageUrl);
 
-
-
-            var product=ProductMapper.FromDto(dto);
             return await _productRepository.AddProductAsync(product);
-
         }
+
+
 
         public async Task<bool> UpdateProduct(int id,UpdateProductDto dto)
         {

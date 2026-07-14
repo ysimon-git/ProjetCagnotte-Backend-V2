@@ -7,6 +7,7 @@ using ProjetCagnotte.Application.Interfaces;
 using ProjetCagnotte.Application.Services;
 using ProjetCagnotte.Domain.Entities;
 using ProjetCagnotte.Infrastructure.Data;
+using ProjetCagnotte.Infrastructure.FileStorage;
 using ProjetCagnotte.Infrastructure.Repositories;
 using ProjetCagnotte.Infrastructure.Security;
 
@@ -38,6 +39,7 @@ namespace ProjetCagnotte.Infrastructure
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
+            services.AddScoped<IFileStorageService,LocalFileStorageService>();
 
 
             return services;
