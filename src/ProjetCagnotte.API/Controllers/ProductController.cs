@@ -76,8 +76,9 @@ namespace ProjetCagnotte.API.Controllers
 
 
         //no update without authorization
-        [Authorize(Roles = "Admin")]
-        [HttpPut]
+        //[Authorize(Roles = "Admin")]
+        [Authorize]
+        [HttpPut("updateProduct/{id}")]
         public async Task<Boolean> UpdateProduct(int id,UpdateProductDto product)
         {
 
@@ -87,8 +88,9 @@ namespace ProjetCagnotte.API.Controllers
 
 
         //no delete without authorization
-        [Authorize(Roles = "Admin")]
-        [HttpDelete]
+        //[Authorize(Roles = "Admin")]
+        [Authorize]
+        [HttpDelete("deleteProduct/{id}")]
         public async Task<Boolean> DeleteProduct(int id)
         {
             return await _productService.DeleteProduct(id);
