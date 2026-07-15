@@ -52,7 +52,7 @@ namespace ProjetCagnotte.Infrastructure.Repositories
                 p.ProductName = product.ProductName;
                 p.ProductDescription = product.ProductDescription;
                 p.Price = product.Price;
-                p.ImageUrl = product.ImageUrl;
+                //p.ImageUrl = product.ImageUrl;
             }
 
 
