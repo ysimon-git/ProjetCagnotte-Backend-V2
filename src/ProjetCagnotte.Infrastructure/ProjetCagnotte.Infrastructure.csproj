@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ProjetCagnotte.Application.Tests\ProjetCagnotte.Application.Tests.csproj" />
     <ProjectReference Include="..\ProjetCagnotte.Application\ProjetCagnotte.Application.csproj" />
     <ProjectReference Include="..\ProjetCagnotte.Domain\ProjetCagnotte.Domain.csproj" />
   </ItemGroup>
