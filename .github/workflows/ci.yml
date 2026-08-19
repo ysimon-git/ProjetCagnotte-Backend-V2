@@ -5,9 +5,9 @@ on:
     branches:
       - main
 
-  pull_request:
-    branches:
-      - main
+ # pull_request:
+ #   branches:
+ #     - main
 
 jobs:
   build-and-test:
@@ -20,7 +20,7 @@ jobs:
       - name: Setup .NET 10  #.net install
         uses: actions/setup-dotnet@v5
         with:
-        dotnet-version: '10.0.x'
+         dotnet-version: '10.0.x'
 
       - name: Restore   #restore
         run: dotnet restore ProjetCagnotte.slnx
