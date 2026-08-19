@@ -19,3 +19,7 @@ publish/
 
 # Configuration locale
 appsettings.Development.json
+
+*.jpg
+*.jpeg
+*.png
